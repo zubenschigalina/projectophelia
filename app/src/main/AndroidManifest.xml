@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        application:
+          - android:name=".NotesApplication" registers our custom Application subclass.
+            Android instantiates it once per process; we expose the repository there.
+          - icon / roundIcon point at the adaptive icon defined in mipmap-anydpi-v26.
+          - theme is the NoActionBar variant (we use our own MaterialToolbar).
+    -->
+    <application
+        android:name=".NotesApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Projectophelia">
+
+        <!--
+            Launcher activity: the notes list.
+            android:exported="true" is required on API 31+ for any activity that has an
+            intent-filter (so the system can launch it from the launcher).
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            Editor activity. Not launchable from outside the app, hence exported="false".
+            android:parentActivityName lets the system render the up-arrow correctly,
+            though we drive back navigation explicitly in the activity too.
+        -->
+        <!--
+            android:windowSoftInputMode="adjustResize" tells the system to shrink the
+            window when the IME (keyboard) appears, so our content gets the keyboard
+            inset and we can pad accordingly. Combined with our IME inset listener
+            inside NoteEditorActivity, this keeps the cursor visible while typing.
+        -->
+        <activity
+            android:name=".ui.NoteEditorActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+    </application>
+
+</manifest>

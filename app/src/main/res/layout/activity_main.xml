@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Notes-list screen.
+
+    Hierarchy:
+      CoordinatorLayout (root)
+        ├─ AppBarLayout
+        │    └─ MaterialToolbar  (replaces the system ActionBar)
+        ├─ RecyclerView          (the actual list of notes)
+        ├─ TextView (empty state, shown when the list is empty)
+        └─ FloatingActionButton  (the "+" to create a note)
+
+    Why CoordinatorLayout? It coordinates child behaviors — chiefly making the FAB
+    "anchor" to the bottom-right and letting Snackbars push it up so they don't overlap.
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--
+        AppBarLayout draws elevation/scroll behavior beneath whatever toolbar we put
+        inside it. Even with a single static toolbar, this is the conventional wrapper.
+    -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--
+            MaterialToolbar replaces the old-style ActionBar. We set it as the activity's
+            support action bar in MainActivity so menu inflation / titles "just work".
+        -->
+        <!--
+            Toolbar height switches from a single fixed `actionBarSize` to `wrap_content`
+            with a generous minHeight. This lets the toolbar grow vertically when the
+            user has cranked up their phone's font scale, instead of clipping the title.
+            titleTextAppearance points at our custom 26sp bold style (see themes.xml).
+        -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/title_notes"
+            app:titleCentered="false"
+            app:titleTextAppearance="@style/TextAppearance.Notes.ToolbarTitle"
+            app:titleTextColor="?attr/colorOnPrimary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--
+        RecyclerView fills the area below the AppBar. The Material `appBarLayout_scrolling`
+        behavior tells it to dodge underneath the AppBar correctly.
+        clipToPadding=false + padding lets the last item scroll past the FAB.
+    -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notesList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="96dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <!--
+        Empty state — toggled by MainActivity based on whether the list has rows.
+        It overlays the RecyclerView; that's fine because the RV is empty when this shows.
+    -->
+    <TextView
+        android:id="@+id/emptyState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="24dp"
+        android:text="@string/empty_state"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        android:visibility="gone" />
+
+    <!--
+        FAB anchored to the bottom-right via standard CoordinatorLayout gravity.
+        Tapped → MainActivity opens the editor in "new note" mode.
+    -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/action_new_note"
+        android:src="@drawable/ic_add" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

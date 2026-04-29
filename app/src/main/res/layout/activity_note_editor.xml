@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Editor screen — used for both creating and editing a note.
+
+    Top: a toolbar with a back arrow + Save/Delete actions (Delete hidden for new notes).
+    Below: stacked title + content fields. Content expands to fill remaining vertical space.
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--
+            The editor toolbar:
+              - navigation icon = back arrow (set programmatically using the activity's
+                support action bar — keeps things i18n-friendly).
+              - menu = save + delete (inflated from menu_editor.xml).
+        -->
+        <!--
+            Same height + titleTextAppearance pattern as MainActivity's toolbar — see
+            comments in activity_main.xml for the rationale on wrap_content + minHeight.
+        -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:menu="@menu/menu_editor"
+            app:navigationContentDescription="@string/action_back"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:title="@string/title_new_note"
+            app:titleTextAppearance="@style/TextAppearance.Notes.ToolbarTitle"
+            app:titleTextColor="?attr/colorOnPrimary" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--
+        Vertical column for the two text fields.
+        layout_behavior keeps it below the toolbar.
+    -->
+    <LinearLayout
+        android:id="@+id/editorContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!--
+            TextInputLayout wraps an EditText to add Material decorations:
+            floating hint, error display, etc. We only use the floating hint here.
+        -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_title"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titleField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="textCapSentences"
+                android:maxLines="1"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--
+            Content field. layout_height=0dp + layout_weight=1 makes it fill the
+            remaining vertical space below the title. gravity=top so the cursor
+            sits at the top when the field is empty.
+        -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:hint="@string/hint_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contentField"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top|start"
+                android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+                android:scrollbars="vertical" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

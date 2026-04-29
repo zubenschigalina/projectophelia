@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Toolbar menu shown while at least one note is selected. Replaces menu_main during
+    selection mode; reverts when selection is cleared.
+
+    Just one action for now (delete the selected notes). Easy place to add things like
+    "Select all" / "Share" later.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_delete_selected"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/action_delete"
+        app:iconTint="?attr/colorOnPrimary"
+        app:showAsAction="always" />
+</menu>

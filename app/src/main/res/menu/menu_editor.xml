@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Menu inflated by the editor's MaterialToolbar.
+    Both items use `showAsAction="always"` so they sit in the toolbar (not the overflow).
+    The editor activity hides `action_delete` when editing a brand-new (id=0) note.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Delete the current note. Hidden when creating a new note. -->
+    <item
+        android:id="@+id/action_delete"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/action_delete"
+        app:iconTint="?attr/colorOnPrimary"
+        app:showAsAction="always" />
+
+    <!-- Persist title + content. Always visible. -->
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_save"
+        android:title="@string/action_save"
+        app:iconTint="?attr/colorOnPrimary"
+        app:showAsAction="always" />
+</menu>

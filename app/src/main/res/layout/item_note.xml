@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    A single row in the notes list.
+    Wrapped in MaterialCardView for visual separation + ripple feedback on tap.
+
+    Layout:
+      ┌────────────────────────────────────────────┐
+      │  Title (bold, single line, ellipsized)     │
+      │  Preview (regular, single line, optional)  │
+      │  Timestamp (small, secondary color)        │
+      └────────────────────────────────────────────┘
+
+    Text-size choices (all `sp`, so they scale with the phone's font-size setting):
+      - title:     22sp bold      — primary, must read at a glance
+      - preview:   17sp           — secondary content, comfortable reading size
+      - timestamp: 13sp           — meta info, intentionally smaller
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    android:checkable="true"
+    app:strokeColor="@color/card_stroke_color"
+    app:strokeWidth="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!--
+            Note title. textAppearanceTitleMedium gives us Material's font family +
+            letter spacing, but we override `textSize` so the size doesn't depend on
+            the (small) Material default.
+        -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:text="Grocery list" />
+
+        <!--
+            First non-empty line of the note body. Hidden when content is empty.
+            Two lines max so a wordy first sentence still gives a useful preview.
+        -->
+        <TextView
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="17sp"
+            tools:text="Eggs, bread, milk" />
+
+        <!--
+            "5 minutes ago" / "yesterday" / "Mar 12". Smaller + secondary color so it
+            visually deprioritizes vs. the title and preview.
+        -->
+        <TextView
+            android:id="@+id/timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAppearance="?attr/textAppearanceLabelSmall"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="13sp"
+            tools:text="5 minutes ago" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

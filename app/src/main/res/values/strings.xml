@@ -1,0 +1,52 @@
+<resources>
+    <!-- App display name shown in the launcher. -->
+    <string name="app_name">Notes</string>
+
+    <!-- ===== List screen ===== -->
+    <!-- Toolbar title on the list screen. -->
+    <string name="title_notes">Notes</string>
+    <!-- Content description for the floating "+" button (read aloud by TalkBack). -->
+    <string name="action_new_note">New note</string>
+    <!-- Shown when there are zero notes. -->
+    <string name="empty_state">No notes yet — tap + to add one</string>
+    <!-- Snackbar message after swiping a note away. -->
+    <string name="note_deleted">Note deleted</string>
+    <!-- Snackbar action: bring it back. -->
+    <string name="action_undo">Undo</string>
+    <!-- Fallback shown in the list when the title field is empty. -->
+    <string name="untitled_note">Untitled</string>
+
+    <!-- ===== Sort menu ===== -->
+    <!-- Toolbar action: open sort options. -->
+    <string name="action_sort">Sort</string>
+    <!-- Sort option labels (radio-checked in the popup). -->
+    <string name="sort_newest_first">Newest first</string>
+    <string name="sort_oldest_first">Oldest first</string>
+
+    <!-- ===== Selection mode ===== -->
+    <!-- Title shown in the toolbar while in multi-select. %1$d is the count. -->
+    <string name="selection_title">%1$d selected</string>
+    <!-- Content description for the X (close) nav icon while in selection mode. -->
+    <string name="action_clear_selection">Clear selection</string>
+    <!-- Snackbar after a bulk delete. Plural so 1 vs many sounds natural. -->
+    <plurals name="notes_deleted_count">
+        <item quantity="one">%d note deleted</item>
+        <item quantity="other">%d notes deleted</item>
+    </plurals>
+
+    <!-- ===== Editor screen ===== -->
+    <!-- Toolbar title when creating a new note. -->
+    <string name="title_new_note">New note</string>
+    <!-- Toolbar title when editing an existing note. -->
+    <string name="title_edit_note">Edit note</string>
+    <!-- Hint inside the title field. -->
+    <string name="hint_title">Title</string>
+    <!-- Hint inside the body field. -->
+    <string name="hint_content">Write something…</string>
+    <!-- Toolbar action: persist changes. -->
+    <string name="action_save">Save</string>
+    <!-- Toolbar action: delete this note. -->
+    <string name="action_delete">Delete</string>
+    <!-- Content description for the back arrow in the editor toolbar. -->
+    <string name="action_back">Back</string>
+</resources>

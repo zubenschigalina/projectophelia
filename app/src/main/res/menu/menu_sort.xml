@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Sort options shown by a PopupMenu when the user taps the sort icon.
+    `checkableBehavior="single"` makes them behave like a radio group — exactly one
+    option is visibly checked. MainActivity sets the checked state to match the
+    currently-active SortOrder before showing the menu.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/sort_newest_first"
+            android:title="@string/sort_newest_first" />
+        <item
+            android:id="@+id/sort_oldest_first"
+            android:title="@string/sort_oldest_first" />
+    </group>
+</menu>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Stroke color for note cards. State-aware so it lights up only when the card is
+    in the "checked" (selected) state, and stays transparent otherwise.
+
+    `state_checked` is the bridge between `MaterialCardView.isChecked` (set by the
+    adapter when an item is in the selectedIds set) and visual feedback in the layout.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:color="?attr/colorPrimary" />
+    <item android:color="@android:color/transparent" />
+</selector>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Default toolbar menu for the list screen (normal mode).
+    The single action opens a sort popup menu — see MainActivity.showSortMenu().
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_sort"
+        android:icon="@drawable/ic_sort"
+        android:title="@string/action_sort"
+        app:iconTint="?attr/colorOnPrimary"
+        app:showAsAction="always" />
+</menu>
