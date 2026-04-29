@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Notes app palette — sage / olive scheme.
+
+    Naming convention: `palette_*` for the raw swatches. Theme attributes (colorPrimary
+    etc.) reference these in themes.xml so we have one place to change a swatch and
+    have it ripple everywhere it's used.
+
+    Hex pairs are AARRGGBB; AA=FF means fully opaque.
+-->
 <resources>
-    <!-- Primary brand palette (purple). Wired up in themes.xml. -->
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <!-- Secondary accent palette (teal). -->
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <!-- Neutral colors used by item backgrounds, text, etc. -->
+    <!-- Deepest tone. Status bar + max-contrast text on light surfaces. -->
+    <color name="palette_dark_olive">#FF3E4512</color>
+    <!-- Mid olive. The app's "primary" — toolbars, primary buttons. -->
+    <color name="palette_olive">#FF6C7339</color>
+    <!-- Pale sage. The activity background that the cards float on. -->
+    <color name="palette_sage">#FFD3D4B9</color>
+    <!-- Bright chartreuse. The "secondary" — FAB, selection highlight. -->
+    <color name="palette_chartreuse">#FFA5AA4A</color>
+    <!-- Warm gray. Muted text, secondary copy, dividers. -->
+    <color name="palette_warm_gray">#FF85866F</color>
+
+    <!-- Neutrals used for icon tints / launcher icon foreground. -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <!-- Background tile for the launcher's adaptive icon. -->
-    <color name="ic_launcher_background">#FF6200EE</color>
+
+    <!-- Background tile for the adaptive launcher icon. Match `colorPrimary`. -->
+    <color name="ic_launcher_background">#FF6C7339</color>
 </resources>

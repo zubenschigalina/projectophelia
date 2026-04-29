@@ -1,57 +1,57 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!--
-        App theme.
-        Parent is `Theme.MaterialComponents.DayNight.NoActionBar`:
-          - "MaterialComponents" gives us Material widgets and styling.
-          - "DayNight" auto-switches between light and dark mode based on the system setting.
-          - "NoActionBar" removes the default top bar (a.k.a. ActionBar / app bar) so the
-            activity renders edge-to-edge with no title strip at the top.
-        If we ever want a top bar back, change this parent to `...DayNight.DarkActionBar`
-        (or add our own Toolbar inside the layout for custom control).
+        App theme. NoActionBar variant because we use our own MaterialToolbar inside
+        the layout. DayNight is kept as the parent so dark-mode users still get a
+        sensible system rendering — but we do not (yet) provide values-night/ overrides
+        for the palette swatches, so the same olive scheme applies in both modes.
+
+        Color attribute mapping to the Notes App palette:
+          colorPrimary          → olive (toolbar bg)
+          colorPrimaryVariant   → dark olive (status bar)
+          colorOnPrimary        → white (toolbar text/icons)
+          colorSecondary        → chartreuse (FAB, selection accent)
+          colorSecondaryVariant → olive
+          colorOnSecondary      → dark olive (icon on chartreuse FAB; high contrast)
+          windowBackground      → sage (page background — cards float on this)
     -->
     <style name="Theme.Projectophelia" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color — used by Material widgets like the Button background tint. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <!-- Darker variant of the primary, used for the status bar (see below). -->
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <!-- Color for text/icons drawn on top of `colorPrimary` (must contrast with it). -->
+        <!-- Primary palette -->
+        <item name="colorPrimary">@color/palette_olive</item>
+        <item name="colorPrimaryVariant">@color/palette_dark_olive</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary accent color — used for things like switches, FAB, highlights. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <!-- Darker variant of the secondary. -->
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <!-- Color for text/icons drawn on top of `colorSecondary`. -->
-        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Secondary palette -->
+        <item name="colorSecondary">@color/palette_chartreuse</item>
+        <item name="colorSecondaryVariant">@color/palette_olive</item>
+        <item name="colorOnSecondary">@color/palette_dark_olive</item>
+
         <!--
-            Tints the system status bar (the strip at the very top showing time/battery).
-            `tools:targetApi="l"` silences a lint warning: this attribute only takes effect
-            on API 21+ (Lollipop), and our minSdk is 26 so we're safely above that.
+            windowBackground paints the activity itself. Cards (MaterialCardView) draw
+            with `colorSurface` (defaults to white in DayNight light mode), which gives
+            them clear separation from this sage page background.
+        -->
+        <item name="android:windowBackground">@color/palette_sage</item>
+
+        <!--
+            Tints the system status bar (the strip showing time/battery). Using the
+            darkest swatch keeps it visually anchored and provides max contrast for
+            white system icons.
+            tools:targetApi="l" silences a lint warning — the attribute only applies on
+            API 21+, and our minSdk is 26, so we're safely past that threshold.
         -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
 
     <!--
         Toolbar title style.
-
-        Why a custom style? The MaterialToolbar default is `TextAppearance.MaterialComponents.Headline6`
-        (20sp), which feels small as a screen-title. We bump the baseline to 26sp.
-
-        Why `sp` (and not `dp`)? `sp` ("scale-independent pixels") multiplies by the user's
-        font-scale preference — i.e. it follows the phone's Settings → Display → Font size
-        slider. Bumping the phone's font size to "Large" makes our title scale up too;
-        switching to "Small" scales it down. `dp` would ignore that setting and look the
-        same regardless.
-
-        textColor is already set on the Toolbar itself via `app:titleTextColor`, so we don't
-        need to repeat it here.
+        - 26sp baseline → noticeably big as a screen title.
+        - `sp` units → scales with the user's Settings → Display → Font size slider.
+        - letterSpacing 0 → denser feel than the default Headline letter spacing.
+        textColor is set per-toolbar via `app:titleTextColor`, so we don't repeat it here.
     -->
     <style name="TextAppearance.Notes.ToolbarTitle" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textSize">26sp</item>
         <item name="android:textStyle">bold</item>
-        <!--
-            letterSpacing 0 overrides the parent's slight tracking — denser, more
-            "screen-name-y" feel than the parent's airy headline tracking.
-        -->
         <item name="android:letterSpacing">0</item>
     </style>
 </resources>

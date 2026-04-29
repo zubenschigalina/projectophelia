@@ -56,12 +56,27 @@
             TextInputLayout wraps an EditText to add Material decorations:
             floating hint, error display, etc. We only use the floating hint here.
         -->
+        <!--
+            android:textColorHint  → placeholder color in the resting position (the
+                                     "Title" hint shown when the field is empty).
+            app:hintTextColor      → color of the hint once it floats up as a label
+                                     (after focus or text entry). Both set to dark
+                                     olive so the placeholder is consistent in all states.
+        -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_title"
+            android:textColorHint="@color/palette_dark_olive"
+            app:hintTextColor="@color/palette_dark_olive"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+            <!--
+                android:textColor sets the color of text the user is *typing* (and the
+                cursor caret). Dark olive on the sage page background hits ~9:1 contrast
+                — easy to read while typing. The display side (cards on the list screen)
+                inverts this: sage text on a dark olive card.
+            -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/titleField"
                 android:layout_width="match_parent"
@@ -69,7 +84,8 @@
                 android:imeOptions="actionNext"
                 android:inputType="textCapSentences"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="@color/palette_dark_olive" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--
@@ -77,21 +93,26 @@
             remaining vertical space below the title. gravity=top so the cursor
             sits at the top when the field is empty.
         -->
+        <!-- Same hint coloring as the title field — see comment above. -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="12dp"
             android:layout_weight="1"
             android:hint="@string/hint_content"
+            android:textColorHint="@color/palette_dark_olive"
+            app:hintTextColor="@color/palette_dark_olive"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+            <!-- Same dark olive text color as the title field. -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/contentField"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top|start"
                 android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"
+                android:textColor="@color/palette_dark_olive" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
